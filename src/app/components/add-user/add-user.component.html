@@ -1,0 +1,67 @@
+<div class="col-md-6 submit-form">
+  <div *ngIf="!submitted">
+    <form [formGroup]="addForm" novalidate>
+
+
+      <div class="form-group">
+        <label for="fname">First Name</label>
+        <input type="text" class="form-control" id="fname" required formControlName="fname" name="fname" />
+      </div>
+      <div *ngIf="addForm.controls['fname'].invalid && addForm.controls['fname'].touched"
+        class="alert alert-danger">
+        <div *ngIf="addForm.controls['fname'].errors.required"> First Name is required. </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lname">Last Name</label>
+        <input type="text" class="form-control" id="lname" required formControlName="lname" name="lname" />
+      </div>
+      <div *ngIf="addForm.controls['lname'].invalid && addForm.controls['lname'].touched"
+        class="alert alert-danger">
+        <div *ngIf="addForm.controls['lname'].errors.required"> Last Name is required. </div>
+      </div>
+
+      <div class="form-group">
+        <label for="mobile">Mobile</label>
+        <input type="text" class="form-control" id="mobile" required formControlName="mobile" name="mobile" />
+      </div>
+      <div *ngIf="addForm.controls['mobile'].invalid && addForm.controls['mobile'].touched"
+        class="alert alert-danger">
+        <div *ngIf="addForm.controls['mobile'].errors.required"> Mobile is required. </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required
+          formControlName="email" name="email" />
+      </div>
+      <div
+        *ngIf="addForm.controls['email'].invalid && addForm.controls['email'].errors.required && addForm.controls['email'].touched"
+        class="alert alert-danger">
+        <div> Email is required. </div>
+      </div>
+      <div *ngIf="addForm.controls['email'].errors?.pattern && addForm.controls['email'].touched"
+        class="alert alert-danger">
+        <div> Invalid Email entered.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" required formControlName="password" name="password" />
+      </div>
+      <div *ngIf="addForm.controls['password'].invalid && addForm.controls['password'].touched"
+        class="alert alert-danger">
+        <div *ngIf="addForm.controls['password'].errors.required"> Password is required. </div>
+      </div>
+
+
+
+      <button (click)="saveUser()" type="submit" [disabled]="requiredForm.status == 'INVALID'" class="btn btn-success">Submit</button>
+    </form>
+  </div>
+
+  <div *ngIf="submitted">
+    <h4>You submitted successfully!</h4>
+    <button class="btn btn-success" (click)="newUser()">Add</button>
+  </div>
+</div>
